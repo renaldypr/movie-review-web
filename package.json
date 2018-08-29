@@ -1,0 +1,27 @@
+{
+  "name": "movie-review-web",
+  "version": "1.0.0",
+  "description": "A movie review website by Renaldy &amp; Agus",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renaldypr/movie-review-web.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/renaldypr/movie-review-web/issues"
+  },
+  "homepage": "https://github.com/renaldypr/movie-review-web#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "pg": "^7.4.3",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.1.1"
+  }
+}
