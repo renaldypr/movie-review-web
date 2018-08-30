@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "pandansar1",
+    "password": 555,
     "database": "movieReviewWeb",
     "host": "127.0.0.1",
     "dialect": "postgres"
