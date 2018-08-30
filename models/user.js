@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   User.associate = function(models) {
     User.belongsToMany(models.Movie, {through: models.Review, foreignKey: 'userId'})
-    User.hasMany(models.Vote, {foreignKey: userId})
+    User.hasMany(models.Vote, {foreignKey: 'userId'})
   };
   return User;
 };

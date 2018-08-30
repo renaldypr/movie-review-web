@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING
   }, {});
   Review.associate = function(models) {
-    Review.hasMany(models.Vote, {foreignKey: reviewId})
+    Review.hasMany(models.Vote, {foreignKey: 'reviewId'})
   };
   return Review;
 };

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     genre: DataTypes.STRING
   }, {});
   Movie.associate = function(models) {
-    Movie.belongsToMany(models.User, {through: models.Review, foreignKey: movieId})
+    Movie.belongsToMany(models.User, {through: models.Review, foreignKey: 'movieId'})
   };
   return Movie;
 };
