@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Movies | Rotten Potatoes</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Search Movies</h1>
+    <div class="container">
+      <form action="/" method="post">
+        <label>Select by Genre</label><br>
+        <select name="genre">
+          <option value="action">Action</option>
+          <option value="comedy">Comedy</option>
+          <option value="documentary">Documentary</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="horror">Horror</option>
+          <option value="musical">Musical</option>
+          <option value="drama">Drama</option>
+          <option value="scifi">Sci-Fi</option>
+          <option value="thriller">Thriller</option>
+        </select>
+        <input type="submit" value="Go">
+      </form><br><br>
+      <form action="/search/rating" method="post">
+        <label>Select by Rating</label><br>
+        <select name="genre">
+          <option value="9">9+</option>
+          <option value="8">8+</option>
+          <option value="7">7+</option>
+          <option value="6">6+</option>
+          <option value="5">5+</option>
+          <option value="4">4+</option>
+          <option value="3">3+</option>
+          <option value="2">2+</option>
+          <option value="1">1+</option>
+        </select>
+        <input type="submit" value="Go">
+      </form>
+    </div><br><br>
+    <a href="/">back</a>
+  </body>
+</html>
