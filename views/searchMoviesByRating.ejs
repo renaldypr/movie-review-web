@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Movie By Rating | Rotten Potatoes</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <h1><%= rating %>+ Movies</h1>
+    <div class="container">
+      <table>
+        <tr>  
+          <th>Movie</th>
+          <th>Genre</th>
+          <th>Average Rating</th>
+        </tr>
+        <% movies.forEach(movie => { %>
+          <tr>
+            <% let arr = []; %>
+            <% for (let i = 0; i < reviews.length; i++) { %>
+              <% if (reviews[i].movieId === movie.id) { %>
+                <% arr.push(reviews[i].score) %>
+              <% } %>
+            <% } %>
+            <% console.log(avg(arr), rating) %>
+            <% if (avg(arr) >= Number(rating)) { %>
+              <td><%= movie.title %></td>
+              <td><%= movie.genre %></td>
+              <td><%= avg(arr) %></td>
+            <% } %>
+          </tr>
+        <% }) %>
+      </table>
+    </div><br>
+    <a href="/search">back</a>
+  </body>
+</html>

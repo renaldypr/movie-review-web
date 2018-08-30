@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Review for <%= movie.title %></title>
+</head>
+<body>
+  <h2>Add Review for <%= movie.title %></h2>
+  <form action="/movies/<%= movie.id %>/addReview" method="POST">
+    USERNAME : <br>
+              <select name="username">
+                <% users.forEach(user => { %>
+                  <option value="<%= user.id %>"><%= user.username %></option>
+                <% }) %>
+              </select><br>
+    SCORE :<br>
+              <input type="number" name="score" value="0" min="1" max="10">
+            <br>
+    REVIEW :<br>
+            <textarea name="review" rows="8" cols="50" placeholder="write your review!"></textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
