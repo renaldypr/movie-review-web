@@ -10,10 +10,4 @@ router.post('/')
 // router.get('/genre')
 // router.get('/rating')
 
-const search = require('./searchRoute');
-
-router.use('/', home);
-router.use('/user', user);
-router.use('/search', search);
-
 module.exports = router;
