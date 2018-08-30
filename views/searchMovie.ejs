@@ -7,7 +7,7 @@
   <body>
     <h1>Search Movies</h1>
     <div class="container">
-      <form action="/" method="post">
+      <form action="/search/genre" method="post">
         <label>Select by Genre</label><br>
         <select name="genre">
           <option value="action">Action</option>
@@ -17,14 +17,14 @@
           <option value="horror">Horror</option>
           <option value="musical">Musical</option>
           <option value="drama">Drama</option>
-          <option value="scifi">Sci-Fi</option>
+          <option value="sci-fi">Sci-Fi</option>
           <option value="thriller">Thriller</option>
         </select>
         <input type="submit" value="Go">
       </form><br><br>
       <form action="/search/rating" method="post">
         <label>Select by Rating</label><br>
-        <select name="genre">
+        <select name="rating">
           <option value="9">9+</option>
           <option value="8">8+</option>
           <option value="7">7+</option>

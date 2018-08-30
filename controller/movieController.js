@@ -3,6 +3,7 @@ const User = require('../models').User;
 const Review = require('../models').Review;
 const Vote = require('../models').Vote; 
 const getAverage = require('../helpers/getAverage');
+const capitalizeFirstLetter = require('../helpers/capitalizeFirstLetter')
 
 
 class movieController{
@@ -134,6 +135,33 @@ class movieController{
             })
             .catch(err => {
                 res.send(err)
+            })
+    }
+
+    static findByGenre(req,res,genre) {
+        Movie.findAll({
+            where: {
+                genre: genre
+            }
+        })
+            .then(movies => {
+                res.render('searchMoviesByGenre', {
+                    movies: movies,
+                    genre: genre,
+                    capitalizeFirstLetter: capitalizeFirstLetter
+                })
+            })
+    }
+    
+    static findByRating(req,res,rating){
+        Movie.findAll()
+            .then(movies=>{
+                res.render('searchMoviesByRating',{
+                    movies:movies, 
+                    reviews:req.reviews, 
+                    rating: rating,
+                    avg: getAverage
+                })
             })
     }
 }
