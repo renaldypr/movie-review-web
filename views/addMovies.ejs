@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add Movies | Rotten Potatoes</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Add Movies</h1>
+    <div class="container">
+        <form action="/movies/add" method="post">
+            <b>Movie Name :</b><br>
+            <input type="text" name="title" class="form-control"><br><br>
+            <b>Movie Genre</b><br>
+                <select name="genre">
+                <option value="action">Action</option>
+                <option value="comedy">Comedy</option>
+                <option value="documentary">Documentary</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="horror">Horror</option>
+                <option value="musical">Musical</option>
+                <option value="drama">Drama</option>
+                <option value="sci-fy">Sci-Fy</option>
+                <option value="thriller">Thriller</option>
+                </select><br><br>
+            <input type="submit" value="Register" class="button">
+        </form>
+    </div>
+
+</body>
+
+
