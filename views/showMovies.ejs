@@ -15,15 +15,23 @@
                     <tr>  
                       <th>Movie</th>
                       <th>Genre</th>
-                      <th>Action</th>
+                      <th>Average Rating</th>
+                      <th>Options</th>
                     </tr>
                     <% movie.forEach(movie => { %>
                       <tr>
                         <td><%= movie.title %></td>
                         <td><%= movie.genre %></td>
-                        <td><a href="/movie/<%= movie.id %>/edit">Edit</a> || 
-                            <a href="/movie/<%= movie.id %>/delete">Delete</a> || 
-                            <a href="/movie/<%= movie.id">See Review</a>
+                        <% let arr = []; %>
+                        <% for (let i = 0; i < reviews.length; i++) { %>
+                          <% if (reviews[i].movieId === movie.id) { %>
+                            <% arr.push(reviews[i].score) %>
+                          <% } %>
+                        <% } %>
+                        <td><%= avg(arr) %></td>
+                        <td><a href="/movies/<%= movie.id %>/edit">Edit</a> || 
+                            <a href="/movies/<%= movie.id %>/delete">Delete</a> || 
+                            <a href="/movies/<%= movie.id %>">See Review</a>
                         </td>
                       </tr>
                     <% }) %>

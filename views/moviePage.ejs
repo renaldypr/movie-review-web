@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= movie.title %> | Rotten Potatoes</title>
+</head>
+<body>
+  <h1><%= movie.title %></h1>
+  <a href="/movies/<%= movie.id %>/addReview">Add Review</a>
+  <div class="container">
+    <table>
+      <tr>
+        <th>No.</th>
+        <th>Username</th>
+        <th>Score</th>
+        <th>Description</th>
+        <th>Upvote</th>
+        <th>Downvote</th>
+      </tr>
+      <% for (let i = 0; i < users.length; i++) { %>
+        <tr>
+          <td><%= i+1 %></td>
+          <td><%= users[i].username %></td>
+          <td><%= users[i].Review.score %></td>
+          <td><%= users[i].Review.description %></td>
+          <% let counterTrue = 0 %>
+          <% let counterFalse = 0 %>
+          <% for (let j = 0; j < reviews.length; j++) { %>
+            <% if (users[i].Review.id === reviews[j].id) { %>
+              <% for (let k = 0; k < reviews[j].Votes.length; k++) { %>
+                <% if (reviews[j].Votes[k].vote_value === true) { %>
+                  <% counterTrue++ %>
+                <% } else if (reviews[j].Votes[k].vote_value === false) { %>
+                  <% counterFalse++ %>
+                <% } %>
+              <% } %>
+            <% } %>
+          <% } %>
+          <td><a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/upvote">UP</a> | <%= counterTrue %></td>
+          <td><a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/downvote">DOWN</a> | <%= counterFalse %></td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+        <br>
+        <a href="/movies">back</a>
+  </body>
+</html>
