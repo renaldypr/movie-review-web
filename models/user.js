@@ -8,11 +8,25 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'username must be filled!'
+        },
+        len: {
+          args: [3,20],
+          msg: 'username length must be between 3 to 20 characters!'
+        }
+      }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'password must be filled!'
+        }
+      }
     },
     gender: DataTypes.STRING,
     email: {

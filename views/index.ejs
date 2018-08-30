@@ -10,11 +10,20 @@
 
     <title>Homepage | Rotten Potatoes</title>
   </head>
+  <%- include('navbar') %>
   <body>
+    <br><br>
     <div class="container">
-      <h3><a href="/user/register">Register</a></h3><br>
-      <h3><a href="/movies">Movies</a></h3><br>
-      <h3><a href="/search">Search</a></h3>
+      <% if (loginStatus) { %>
+        <h3 class="text-center"><a href="/user/profile">Profile</a></h3>
+      <% } else { %>
+        <h3 class="text-center"><a href="/user/register">Sign Up</a> | <a href="/user/login">Log In</a></h3><br>
+      <% } %>
+      <h3 class="text-center"><a href="/movies">Movies</a></h3><br>
+      <h3 class="text-center"><a href="/search">Search</a></h3>
+      <% if (loginStatus) { %>
+        <h3 class="text-center"><a href="/user/logout">Log Out</a></h3>
+      <% } %>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

@@ -20,7 +20,7 @@ class movieController{
     
     static showAll(req,res){
         Movie.findAll().then(data=>{
-            res.render('showMovies',{movie:data, reviews:req.reviews, avg: getAverage })
+            res.render('showMovies',{movie:data, reviews:req.reviews, avg: getAverage, loginStatus: req.session.user})
         })
     }
 
@@ -67,24 +67,14 @@ class movieController{
             include: [Vote]
         })
         .then(reviews => {
-            //res.send(reviews)
+            //res.send(req.movieData.Users)
             res.render('moviePage', {
                 movie: req.movieData,
                 users: req.movieData.Users,
-                reviews: reviews
+                reviews: reviews,
+                loginStatus: req.session.user
             })
         })
-    }
-
-    static showAllUser(req,res, next) {
-        User.findAll()
-            .then(users => {
-                req.users = users
-                next()
-            })
-            .catch(err => {
-                res.send(err)
-            })
     }
 
     static showMovieForReview(req, res) {
@@ -96,7 +86,6 @@ class movieController{
             .then(movie => {
                 res.render('addReview', {
                     movie: movie,
-                    users: req.users
                 })
             })
             .catch(err => {
@@ -104,9 +93,21 @@ class movieController{
             })
     }
 
+    static findId(req,res, next) {
+        User.findOne({
+            where: {
+                username: req.session.user
+            }
+        })
+            .then(user => {
+                req.userId = user.id
+                next()
+            })
+    }
+
     static postReview(req,res) {
         Review.create({
-            userId: req.body.username,
+            userId: req.userId,
             movieId: req.params.id,
             score: req.body.score,
             description: req.body.review

@@ -12,7 +12,17 @@
 <%- include('navbar') %>
 <body>
   <h1><%= movie.title %></h1>
-  <a href="/movies/<%= movie.id %>/addReview">Add Review</a>
+  <% let sudahReview = false %>
+  <% for (let i = 0; i < users.length; i++) { %>
+    <% console.log(users[i].username, loginStatus) %>
+    <% if (users[i].username === loginStatus) { %>
+      <% sudahReview = true; %>
+      <% break; %>
+    <% } %>
+  <% } %>
+  <% if (loginStatus && sudahReview === false) { %>
+    <a href="/movies/<%= movie.id %>/addReview">Add Review</a>
+  <% } %>
   <div class="container">
     <table>
       <tr>
