@@ -59,8 +59,17 @@
               <% } %>
             <% } %>
           <% } %>
-          <td><a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/upvote">UP</a> | <%= counterTrue %></td>
-          <td><a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/downvote">DOWN</a> | <%= counterFalse %></td>
+          <td>
+            <% if (loginStatus) { %>
+              <a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/upvote">UP</a> | 
+            <% } %>
+            <%= counterTrue %>
+          </td>
+          <td>
+            <% if (loginStatus) { %>
+            <a href="/movies/<%= movie.id %>/review/<%= users[i].Review.id %>/downvote">DOWN</a> | 
+            <% } %>
+            <%= counterFalse %></td>
         </tr>
       <% } %>
     </table>

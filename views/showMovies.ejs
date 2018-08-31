@@ -35,8 +35,11 @@
             <% } %>
           <% } %>
           <td><%= avg(arr) %></td>
-          <td><a href="/movies/<%= movie.id %>/edit">Edit</a> || 
-              <a href="/movies/<%= movie.id %>/delete">Delete</a> || 
+          <td>
+            <% if (loginStatus) { %>
+              <a href="/movies/<%= movie.id %>/edit">Edit</a> || 
+              <a href="/movies/<%= movie.id %>/delete" onclick="return confirm('delete this movie?')">Delete</a> ||
+            <% } %>
               <a href="/movies/<%= movie.id %>">See Review</a>
           </td>
         </tr>
