@@ -13,15 +13,18 @@
 <body>
   <h1><%= movie.title %></h1>
   <% let sudahReview = false %>
+  <% let reviewId %>
   <% for (let i = 0; i < users.length; i++) { %>
-    <% console.log(users[i].username, loginStatus) %>
     <% if (users[i].username === loginStatus) { %>
       <% sudahReview = true; %>
+      <% reviewId = users[i].Review.id %>
       <% break; %>
     <% } %>
   <% } %>
   <% if (loginStatus && sudahReview === false) { %>
     <a href="/movies/<%= movie.id %>/addReview">Add Review</a>
+  <% } else if (loginStatus && sudahReview === true) { %>
+    <a href="/movies/<%= movie.id %>/review/<%= reviewId %>/">Edit Review</a>
   <% } %>
   <div class="container">
     <table>

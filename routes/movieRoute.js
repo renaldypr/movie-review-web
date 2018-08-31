@@ -15,6 +15,8 @@ router.get('/:id', movie.showMovieById, movie.countVote)
 router.get('/:id/addReview', movie.showMovieForReview)
 router.post('/:id/addReview', movie.findId, movie.postReview)
 
+router.get('/:id/review/:idReview/', movie.showMovieEdit)
+router.post('/:id/review/:idReview/', movie.editReview)
 
 router.get('/:id/review/:idReview/:status', movie.findUser, movie.addVote)
 
