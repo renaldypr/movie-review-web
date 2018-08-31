@@ -211,6 +211,35 @@ class movieController{
                 })
             })
     }
+
+    static showMovieEdit(req,res) {
+        Review.findOne({
+            where: {
+                id: req.params.idReview
+            }
+        })
+            .then(review => {
+                res.render('editReview', {
+                    review: review,
+                    errors: undefined,
+                    movieId: req.params.id
+                })
+            })
+    }
+
+    static editReview(req,res) {
+        Review.update({
+            score: req.body.score,
+            description: req.body.description
+        }, {
+            where: {
+                id: req.params.idReview
+            }
+        })
+            .then(() => {
+                res.redirect(`/movies/${req.params.id}`)
+            })
+    }
 }
 
 module.exports=movieController;
