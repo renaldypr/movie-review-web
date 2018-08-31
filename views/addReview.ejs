@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Review for <%= movie.title %></title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<%- include('navbar') %>
+<body background="https://pixelatedaudio.com/wp-content/uploads/2015/12/new-PA-background-web.jpg">
+  <br><br>
+  <div class="mx-auto" style="width: 500px;">
+    <h2 class="text-center text-white">Add Review for <%= movie.title %></h2>
+    <div class="container">
+      <form action="/movies/<%= movie.id %>/addReview" method="POST">
+        <div clas="form-group">
+          <label class="text-white">Score</label>
+          <select name="score" class="custom-select">
+            <% for (let i = 1; i <= 10; i++) { %>
+              <option value="<%= i %>"><%= i %></option>
+            <% } %>
+          </select>
+        </div><br>
+        <div clas="form-group">
+            <label class="text-white">Review</label>
+            <textarea class="form-control" name="review" rows="8" cols="50" placeholder="write your review!"></textarea>
+            <br><br>
+            <input type="submit" value="Submit">
+        </div>
+      </form>
+      </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
