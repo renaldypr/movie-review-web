@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <%- include('navbar') %>
-<body>
-  <h1><%= movie.title %></h1>
+<body background="https://pixelatedaudio.com/wp-content/uploads/2015/12/new-PA-background-web.jpg">
+  <br><br>
+  <h1 class="text-white text-center"><%= movie.title %></h1>
   <% let sudahReview = false %>
   <% let reviewId %>
   <% for (let i = 0; i < users.length; i++) { %>
@@ -21,13 +22,16 @@
       <% break; %>
     <% } %>
   <% } %>
-  <% if (loginStatus && sudahReview === false) { %>
-    <a href="/movies/<%= movie.id %>/addReview">Add Review</a>
-  <% } else if (loginStatus && sudahReview === true) { %>
-    <a href="/movies/<%= movie.id %>/review/<%= reviewId %>/">Edit Review</a>
-  <% } %>
+  <div class="mx-auto" style="width: 100px;">
+      <% if (loginStatus && sudahReview === false) { %>
+        <a href="/movies/<%= movie.id %>/addReview" class="badge badge-primary">Add Review</a>
+      <% } else if (loginStatus && sudahReview === true) { %>
+        <a href="/movies/<%= movie.id %>/review/<%= reviewId %>/" class="badge badge-primary">Edit Review</a>
+      <% } %>
+  </div>
+  <br>
   <div class="container">
-    <table>
+    <table class="table table-striped table-dark">
       <tr>
         <th>No.</th>
         <th>Username</th>
@@ -41,7 +45,7 @@
           <td><%= i+1 %></td>
           <td><%= users[i].username %></td>
           <td><%= users[i].Review.score %></td>
-          <td><%= users[i].Review.description %></td>
+          <td width=400px><%= users[i].Review.description %></td>
           <% let counterTrue = 0 %>
           <% let counterFalse = 0 %>
           <% for (let j = 0; j < reviews.length; j++) { %>
@@ -61,8 +65,9 @@
       <% } %>
     </table>
   </div>
-  <br>
-  <a href="/movies">back</a>
+  <div class="mx-auto" style="width: 50px;">
+      <a href="/movies" class="badge badge-primary">Back</a>
+  </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>    
