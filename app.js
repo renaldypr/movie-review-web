@@ -1,9 +1,15 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(session({
+  secret: 'rotten-potatoes',
+  resave: true,
+  saveUninitialized: true
+}));
 
 const router = require('./routes');
 

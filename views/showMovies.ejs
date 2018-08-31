@@ -13,7 +13,9 @@
 <%- include('navbar') %>
 <body>
   <h1 class="text-center">MOVIES</h1><br>
-  <a href="/movies/add"><p class="text-center">add Movies</p></a>
+  <% if (loginStatus) { %>
+    <a href="/movies/add"><p class="text-center">add Movies</p></a>
+  <% } %>
   <div class="container">
     <table class="table">
       <tr>  

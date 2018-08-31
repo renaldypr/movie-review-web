@@ -20,7 +20,7 @@ class movieController{
     
     static showAll(req,res){
         Movie.findAll().then(data=>{
-            res.render('showMovies',{movie:data, reviews:req.reviews, avg: getAverage })
+            res.render('showMovies',{movie:data, reviews:req.reviews, avg: getAverage, loginStatus: req.session.user})
         })
     }
 
@@ -67,24 +67,14 @@ class movieController{
             include: [Vote]
         })
         .then(reviews => {
-            //res.send(reviews)
+            //res.send(req.movieData.Users)
             res.render('moviePage', {
                 movie: req.movieData,
                 users: req.movieData.Users,
-                reviews: reviews
+                reviews: reviews,
+                loginStatus: req.session.user
             })
         })
-    }
-
-    static showAllUser(req,res, next) {
-        User.findAll()
-            .then(users => {
-                req.users = users
-                next()
-            })
-            .catch(err => {
-                res.send(err)
-            })
     }
 
     static showMovieForReview(req, res) {
@@ -96,7 +86,6 @@ class movieController{
             .then(movie => {
                 res.render('addReview', {
                     movie: movie,
-                    users: req.users
                 })
             })
             .catch(err => {
@@ -104,9 +93,21 @@ class movieController{
             })
     }
 
+    static findId(req,res, next) {
+        User.findOne({
+            where: {
+                username: req.session.user
+            }
+        })
+            .then(user => {
+                req.userId = user.id
+                next()
+            })
+    }
+
     static postReview(req,res) {
         Review.create({
-            userId: req.body.username,
+            userId: req.userId,
             movieId: req.params.id,
             score: req.body.score,
             description: req.body.review
@@ -119,6 +120,31 @@ class movieController{
             })
     }
 
+    static findUser(req,res, next) {
+        User.findOne({
+            where: {
+                username: req.session.user
+            },
+            include: [Vote]
+        })
+            .then(user => {
+                let votes = user.Votes
+                let sudahVote = false
+                let voteId
+                for (let i = 0; i < votes.length; i++) {
+                    if (votes[i].reviewId === Number(req.params.idReview)) {
+                        sudahVote = true;
+                        voteId = votes[i].id
+                        break;
+                    }
+                }
+                req.user = user;
+                req.sudahVote = sudahVote;
+                req.voteId = voteId
+                next()
+            })
+    }
+
     static addVote(req,res) {
         let status;
         if (req.params.status === 'upvote') {
@@ -126,16 +152,37 @@ class movieController{
         } else if (req.params.status === 'downvote') {
             status = false;
         }
-        Vote.create({
-            reviewId: req.params.idReview,
-            vote_value: status
-        })
-            .then(() => {
-                res.redirect(`/movies/${req.params.id}`)
+        //res.send(req.sudahVote)
+        //jika dia belum voting di review id tersebut maka create , kalau sudah update
+        if (!req.sudahVote) {
+            Vote.create({
+                reviewId: req.params.idReview,
+                userId: req.user.id,
+                vote_value: status
+                
             })
-            .catch(err => {
-                res.send(err)
+                .then(() => {
+                    res.redirect(`/movies/${req.params.id}`)
+                })
+                .catch(err => {
+                    res.send(err)
+                }) 
+        } else {
+            Vote.update({
+                vote_value: status
+            }, {
+                where: {
+                    id: req.voteId
+                }
             })
+                .then(() => {
+                    res.redirect(`/movies/${req.params.id}`)
+                })
+                .catch(err => {
+                    res.send(err)
+                }) 
+        }
+        
     }
 
     static findByGenre(req,res,genre) {
