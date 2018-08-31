@@ -19,7 +19,8 @@ router.get('/login', (req,res) => {
 });
 router.post('/login', UserController.login)
 
-// router.get('/profile', UserController.edit)
+router.get('/profile', UserController.findOne)
+router.post('/profile', UserController.edit)
 
 router.get('/logout', UserController.logout)
 

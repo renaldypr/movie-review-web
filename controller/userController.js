@@ -31,7 +31,7 @@ class UserController {
       .then(user => {
         if (!user) {
           res.redirect('/user/login')
-        } else if (user.password === req.body.password) {
+        } else if (user.validPassword(req.body.password)) {
           req.session.user = user.username
           res.redirect('/')
         } else {
@@ -39,10 +39,63 @@ class UserController {
         }
       })
   }
+  /*
+  .post((req, res) => {
+        var username = req.body.username,
+            password = req.body.password;
+
+        User.findOne({ where: { username: username } }).then(function (user) {
+            if (!user) {
+                res.redirect('/login');
+            } else if (!user.validPassword(password)) {
+                res.redirect('/login');
+            } else {
+                req.session.user = user.dataValues;
+                res.redirect('/dashboard');
+            }
+        });
+    });
+  */
 
   static logout(req,res) {
     req.session.destroy();
     res.redirect('/')
+  }
+
+  static findOne(req,res) {
+    User.findOne({
+      where: {
+        username: req.session.user
+      }
+    })
+      .then(user => {
+        res.render('userProfile', {
+          user: user,
+          errors: undefined
+        })
+      })
+      .catch(err => {
+        res.send(err)
+      })
+  }
+
+  static edit(req,res) {
+    User.update({
+      username: req.body.username,
+      password: req.body.password,
+      gender: req.body.gender,
+      email: req.body.email
+    }, {
+      where: {
+        username: req.session.user
+      }
+    })
+      .then(() => {
+        res.redirect('/')
+      })
+      .catch(err => {
+        res.send(err)
+      })
   }
 }
 
