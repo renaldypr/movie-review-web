@@ -19,7 +19,9 @@ class movieController{
     }
     
     static showAll(req,res){
-        Movie.findAll().then(data=>{
+        Movie.findAll({
+            order: [['title', 'ASC']]
+        }).then(data=>{
             res.render('showMovies',{movie:data, reviews:req.reviews, avg: getAverage, loginStatus: req.session.user})
         })
     }
@@ -212,7 +214,7 @@ class movieController{
             })
     }
 
-    static showMovieEdit(req,res) {
+    static showReviewEdit(req,res) {
         Review.findOne({
             where: {
                 id: req.params.idReview
@@ -238,6 +240,45 @@ class movieController{
         })
             .then(() => {
                 res.redirect(`/movies/${req.params.id}`)
+            })
+    }
+
+    static showEdit(req,res) {
+        Movie.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(movie => {
+                res.render('editMovie', {
+                    movie: movie,
+                    errors: undefined
+                })
+            })
+    }
+
+    static edit(req,res) {
+        Movie.update({
+            title: req.body.title,
+            genre: req.body.genre
+        }, {
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(() => {
+                res.redirect('/movies')
+            })
+    }
+
+    static erase(req,res) {
+        Movie.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(() => {
+                res.redirect('/movies')
             })
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Search Movie By Genre | Rotten Potatoes</title>
+    <title>Edit Movie | Rotten Potatoes</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,22 +11,34 @@
   </head>
 <%- include('navbar') %>
   <body>
-    <h1><%= capitalizeFirstLetter(genre) %> Movies</h1>
+    <h1>Edit Movie</h1>
+    <ul style="color: red;">
+        <% if (errors) { %>
+          <% for (let i = 0; i < errors.length; i++) { %>
+            <li><%= errors[i] %></li>
+          <% } %>
+        <% } %>
+      </ul>
     <div class="container">
-      <table class="table">
-        <tr>  
-          <th>Movie Title</th>
-          <th>Genre</th>
-        </tr>
-        <% movies.forEach(movie => { %>
-          <tr>
-            <td><%= movie.title %></td>
-            <td><%= movie.genre %></td>
-          </tr>
-        <% }) %>
-        </table>
+      <form action="/movies/<%= movie.id %>/edit" method="post">
+        <b>Title</b><br>
+        <input type="text" name="title" value="<%= movie.title %>" class="form-control"><br><br>
+        <b>Genre</b><br>
+        <select name="genre">
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="documentary">Documentary</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="musical">Musical</option>
+            <option value="drama">Drama</option>
+            <option value="sci-fi">Sci-Fy</option>
+            <option value="thriller">Thriller</option>
+            </select><br><br>
+        <input type="submit" value="Edit" class="button">
+      </form>
     </div><br>
-    <a href="/search">back</a>
+    <a href="/movies">back</a>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
